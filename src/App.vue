@@ -46,7 +46,7 @@ const vueform = ref({
     },
     buttonLink: {
       type: 'text',
-      placeholder: 'Button Name',
+      placeholder: 'Button Link',
     },
     source: {
       type: 'text',
@@ -96,12 +96,17 @@ const updateKey = ref(0);
     </tr>
     <tr>
       <td colspan="2" style="vertical-align: top;">
+        <!-- Ensure this <div> is included to display content -->
+        <div v-html="formValues.content" style="margin-bottom: 10px;"></div>
+        
+        <!-- Button with link -->
         <a :href="formValues.buttonLink" style="text-decoration: none;">
-            <button style="display: block; width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
-              {{ formValues.button }}
-            </button>
-          </a>
+          <button style="display: block; width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+            {{ formValues.button }}
+          </button>
+        </a>
       </td>
     </tr>
   </table>
 </template>
+
