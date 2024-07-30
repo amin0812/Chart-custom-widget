@@ -20,10 +20,6 @@ const vueform = ref({
       content: 'Custom Widget',
       tag: 'h1'
     },
-    link: {
-      type: 'text',
-      placeholder: 'Image URL',
-    },
     headline: {
       type: 'text',
       placeholder: 'Headline'
@@ -32,6 +28,11 @@ const vueform = ref({
       type: 'text',
       placeholder: 'Subheadline'
     },
+    link: {
+      type: 'text',
+      placeholder: 'Image URL',
+    },
+    
     content: {
       type: 'editor',
     },
@@ -41,21 +42,11 @@ const vueform = ref({
     },
     button: {
       type: 'text',
-      placeholder: 'Button Link',
+      placeholder: 'Button Name',
     },
-    phone: {
-      type: 'phone',
-      placeholder: 'Phone'
-    },
-    email: {
+    buttonLink: {
       type: 'text',
-      inputType: 'email',
-      rules: [
-        'required',
-        'max:255',
-        'email',
-      ],
-      placeholder: 'Email',
+      placeholder: 'Button Name',
     },
     source: {
       type: 'text',
@@ -105,10 +96,11 @@ const updateKey = ref(0);
     </tr>
     <tr>
       <td colspan="2" style="vertical-align: top;">
-        <div v-html="formValues.content" style="margin-bottom: 10px;"></div>
-        <button v-if="formValues.button" style="display: block; width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
-          {{ formValues.button }}
-        </button>
+        <a :href="formValues.buttonLink" style="text-decoration: none;">
+            <button style="display: block; width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+              {{ formValues.button }}
+            </button>
+          </a>
       </td>
     </tr>
   </table>
