@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUpdated, ref, unref } from 'vue';
+import { onMounted, onUpdated, ref, computed, unref } from 'vue';
 import { cloneDeep } from 'lodash';
 import sdkclass from 'blocksdk';
 
@@ -32,7 +32,6 @@ const vueform = ref({
       type: 'text',
       placeholder: 'Image URL',
     },
-    
     content: {
       type: 'editor',
     },
@@ -52,6 +51,53 @@ const vueform = ref({
       type: 'text',
       placeholder: 'Source'
     },
+    ImageSize: {
+      type: 'radiogroup',
+      items: [
+        'Small',
+        'Medium',
+        'Large',
+        'Default'
+      ],
+      label: 'Image Size',
+    },
+    ImageAlignment: {
+      type: 'radiogroup',
+      items: [
+        'Left',
+        'Center',
+        'Right',
+      ],
+      label: 'Image Alignment',
+    },
+  }
+});
+
+// Computed property to determine image size based on selected option
+const imageSize = computed(() => {
+  switch (formValues.value.ImageSize) {
+    case 'Small':
+      return '100px';
+    case 'Medium':
+      return '200px';
+    case 'Large':
+      return '300px';
+    default:
+      return '100%'; // Default or fallback size
+  }
+});
+
+// Computed property to determine image alignment based on selected option
+const imageAlignment = computed(() => {
+  switch (formValues.value.ImageAlignment) {
+    case 'Left':
+      return '0 auto 0 0'; // Left align
+    case 'Right':
+      return '0 0 0 auto'; // Right align
+    case 'Center':
+      return '0 auto'; // Center align
+    default:
+      return '0 auto'; // Default to center
   }
 });
 
@@ -85,7 +131,17 @@ const updateKey = ref(0);
     <tr>
       <td colspan="2" style="padding: 0;">
         <template v-if="formValues.link">
-          <img :src="formValues.link" alt="Image" style="width: 100%; height: auto; object-fit: cover;">
+          <img
+            :src="formValues.link"
+            alt="Image"
+            :style="{
+              width: imageSize,
+              height: 'auto',
+              objectFit: 'cover',
+              display: 'block',
+              margin: imageAlignment
+            }"
+          >
         </template>
       </td>
     </tr>
@@ -96,12 +152,10 @@ const updateKey = ref(0);
     </tr>
     <tr>
       <td colspan="2" style="vertical-align: top;">
-        <!-- Ensure this <div> is included to display content -->
         <div v-html="formValues.content" style="margin-bottom: 10px;"></div>
         
-        <!-- Button with link -->
         <a :href="formValues.buttonLink" style="text-decoration: none;">
-          <button style="display: block; width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+          <button v-if="formValues.button" style="display: block; width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
             {{ formValues.button }}
           </button>
         </a>
@@ -109,4 +163,3 @@ const updateKey = ref(0);
     </tr>
   </table>
 </template>
-
