@@ -1,10 +1,72 @@
+<template>
+  <Vueform :key="updateKey" v-bind="vueform" />
+
+  <table id="widget-content"
+    style="width: 100%; background-color: #f0f0f0; padding: 10px; border-radius: 5px; border-spacing: 10px;">
+    <tr>
+      <td class="regular-text" style="text-align: left; padding: 10px 40px;">
+        <h2 class="h3-purple" style="color:#6D5BA3; margin-bottom: 5px;">
+          {{ formValues.headline }}
+        </h2>
+        <h4 class="h4-headline" style="color:#181E20; margin: 0;">
+          {{ formValues.subheadline }}
+        </h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding: 0;">
+        <template v-if="formValues.link">
+          <img :src="formValues.link" alt="Image" :style="{
+    width: imageSize,
+    height: 'auto',
+    objectFit: 'cover',
+    display: 'block',
+    margin: imageAlignment
+  }">
+        </template>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: left; font-size: 0.9em; color: #888; padding: 0 40px 10px;">
+        <span v-if="formValues.source">{{ formValues.source }}</span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="vertical-align: top; padding: 0 40px;">
+        <div v-html="formValues.content" :style="{ width: imageSize, margin: '0 auto', textAlign: 'left', paddingBottom:'20px', margin: imageAlignment }"></div>
+
+        <template v-if="formValues.button">
+          <div :style="{ width: imageSize, margin: imageAlignment, paddingBottom: '20px' }">
+            <table border="0" cellpadding="0" cellspacing="0" style="background:#ffffff; width: 100%;">
+              <tr>
+                <td width="28px !important;">
+                  <img alt="" height="40"
+                    src="https://image.s50.sfmc-content.com/lib/fe3211717564047b7c1272/m/1/2cff3a47-c908-46e5-bf25-fcc44541a4d3.png"
+                    style="display: block; height: 40px !important; max-height: 40px !important;" width="28">
+                </td>
+                <td style="background-color: #007d85;">
+                  <a :href="formValues.buttonLink"
+                    style="color:#ffffff;text-decoration:none;font-family: DWS Slab TT, Rockwell, Calibri, Arial, Helvetica, sans-serif;height:40px !important;max-height:40px !important;font-size: 14px;line-height: 45px;mso-line-height-rule: exactly;display: block;background: #007d85;background-color: #007d85;text-align: center;vertical-align: middle;"
+                    :title="formValues.button">{{ formValues.button }}</a>
+                </td>
+                <td width="28px !important;">
+                  <img alt="" height="40"
+                    src="https://image.s50.sfmc-content.com/lib/fe3211717564047b7c1272/m/1/1d91c65d-47fb-4c8a-98e1-612c093749f7.png"
+                    style="display: block; height: 40px !important; max-height: 40px !important;" width="28">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </template>
+      </td>
+    </tr>
+  </table>
+</template>
+
 <script setup>
 import { onMounted, onUpdated, ref, computed, unref } from 'vue';
 import { cloneDeep } from 'lodash';
 import sdkclass from 'blocksdk';
-
-// Import Font Awesome CSS
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const sdk = new sdkclass();
 
@@ -117,70 +179,3 @@ onUpdated(() => {
 
 const updateKey = ref(0);
 </script>
-
-<template>
-  <Vueform :key="updateKey" v-bind="vueform" />
-  
-  <table id="widget-content"
-    style="width: 100%; background-color: #f0f0f0; padding: 10px; border-radius: 5px; border-spacing: 10px;">
-    <tr>
-      <td class="regular-text" style="text-align: left; padding: 10px 40px;">
-        <h2 class="h3-purple" style="color:#6D5BA3;">
-          {{ formValues.headline }}
-        </h2>
-        <h2 class="h4-headline" style="color:#181E20;text-align: left; ">
-          {{ formValues.subheadline }}
-        </h2>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" style="padding: 0;">
-        <template v-if="formValues.link">
-          <img :src="formValues.link" alt="Image" :style="{
-    width: imageSize,
-    height: 'auto',
-    objectFit: 'cover',
-    display: 'block',
-    margin: imageAlignment
-  }">
-        </template>
-      </td>
-    </tr>
-    <tr>
-      <div :style="{ width: imageSize, margin: imageAlignment }">
-      <td colspan="2" style="text-align: left; font-size: 0.9em; color: #888; padding: 0 0 10px 0;">
-        <span v-if="formValues.source">{{ formValues.source }}</span>
-      </td>
-    </div>
-    </tr>
-    <tr>
-      <td colspan="2" style="vertical-align: top;">
-        <div v-html="formValues.content" :style="{ width: imageSize, margin: '0 auto', textAlign: 'left', paddingBottom:'20px' ,margin: imageAlignment }"></div>
-
-        <template v-if="formValues.button">
-          <div :style="{ width: imageSize, margin: imageAlignment}">
-            <table border="0" cellpadding="0" cellspacing="0" style="background:#ffffff; width: 100%;">
-              <tr>
-                <td width="28px !important;">
-                  <img alt="" height="40"
-                    src="https://image.s50.sfmc-content.com/lib/fe3211717564047b7c1272/m/1/2cff3a47-c908-46e5-bf25-fcc44541a4d3.png"
-                    style="display: block; height: 40px !important; max-height: 40px !important;" width="28">
-                </td>
-                <td style="background-color: #007d85;">
-                  <a :href="formValues.buttonLink"
-                    style="color:#ffffff;text-decoration:none;font-family: DWS Slab TT, Rockwell, Calibri, Arial, Helvetica, sans-serif;height:40px !important;max-height:40px !important;font-size: 14px;line-height: 45px;mso-line-height-rule: exactly;display: block;background: #007d85;background-color: #007d85;text-align: center;vertical-align: middle;"
-                    :title="formValues.button">{{ formValues.button }}</a>
-                </td>
-                <td width="28px !important;">
-                  <img alt="" height="40"
-                    src="https://image.s50.sfmc-content.com/lib/fe3211717564047b7c1272/m/1/1d91c65d-47fb-4c8a-98e1-612c093749f7.png"
-                    style="display: block; height: 40px !important; max-height: 40px !important;" width="28">
-                </td>
-              </tr>
-            </table>
-          </div>
-        </template>
-      </td>
-    </tr>
-  </table>
-</template>
