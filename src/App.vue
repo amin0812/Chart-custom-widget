@@ -124,17 +124,19 @@ const updateKey = ref(0);
   <table id="widget-content"
     style="width: 100%; background-color: #f0f0f0;">
     <tr>
+      <!-- Apply padding directly to the TD containing the headline and subheadline -->
       <td style="text-align: left; padding: 10px 40px;">
-        <h2 class="h3-purple" style="color:#6D5BA3;">
+        <!-- Add padding directly to the H2 elements as well -->
+        <h2 class="h3-purple" style="color:#6D5BA3; padding: 10px 40px;">
           {{ formValues.headline }}
         </h2>
-        <h2 class="h4-headline" style="color:#181E20;text-align: left; ">
+        <h2 class="h4-headline" style="color:#181E20;text-align: left; padding: 10px 40px;">
           {{ formValues.subheadline }}
         </h2>
       </td>
     </tr>
     <tr>
-      <td colspan="2" style="padding: 0;">
+      <td  style="padding: 0;">
         <template v-if="formValues.link">
           <img :src="formValues.link" alt="Image" :style="{
     width: imageSize,
