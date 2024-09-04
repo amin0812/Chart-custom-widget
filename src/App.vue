@@ -1,10 +1,10 @@
 <template>
   <Vueform :key="updateKey" v-bind="vueform" />
-
-  <table id="widget-content"
-    style="width: 100%; background-color: #f0f0f0; padding: 10px; border-radius: 5px; border-spacing: 10px;">
+  <div id="widget-content"
+    style="max-width: 100%; margin: 0 auto; background-color: #f0f0f0; padding: 10px; border-radius: 5px;">
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
     <tr>
-      <td class="regular-text" style="text-align: left; padding: 10px 40px;">
+      <td class="regular-text" style="text-align: left; padding: 10px 100px;">
         <h2 class="h3-purple" style="color:#6D5BA3; margin-bottom: 5px;">
           {{ formValues.headline }}
         </h2>
@@ -61,6 +61,7 @@
       </td>
     </tr>
   </table>
+  </div>
 </template>
 
 <script setup>
