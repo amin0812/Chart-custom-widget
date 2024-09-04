@@ -120,7 +120,7 @@ const updateKey = ref(0);
 
 <template>
   <Vueform :key="updateKey" v-bind="vueform" />
-
+  
   <table id="widget-content"
     style="width: 100%; background-color: #f0f0f0; padding: 10px; border-radius: 5px; border-spacing: 10px;">
     <tr>
