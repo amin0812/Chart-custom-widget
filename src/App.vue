@@ -125,15 +125,14 @@ const updateKey = ref(0);
     style="width: 100%; background-color: #f0f0f0;">
     <tr>
       <!-- Apply padding directly to the TD containing the headline and subheadline -->
-      <td style="text-align: left; padding: 10px 40px;">
-        <!-- Add padding directly to the H2 elements as well -->
-        <h2 class="h3-purple" style="color:#6D5BA3; padding: 10px 40px;">
-          {{ formValues.headline }}
-        </h2>
-        <h2 class="h4-headline" style="color:#181E20;text-align: left; padding: 10px 40px;">
-          {{ formValues.subheadline }}
-        </h2>
-      </td>
+      <td class="regular-text" style="text-align: left; padding: 10px 40px;">
+            <h2 class="h3-purple" style="color:#6D5BA3;">
+              {{ formValues.headline }}
+            </h2>
+            <h2 class="h4-headline" style="color:#181E20;text-align: left; ">
+              {{ formValues.subheadline }}
+            </h2>
+          </td>
     </tr>
     <tr>
       <td  style="padding: 0;">
